@@ -4,13 +4,14 @@
 #include <vector>
 #include <string>
 
-struct DiamondSquare{
+struct DiamondSquare
+{
 
     // Fields
-    vector<uint_8> pixelData;
-    vector<uint_8> colorData;
-    uint_8 max;
-    uint_8 waterLevel;
+    std::vector<uint8_t> pixelData;
+    std::vector<uint8_t> colorData;
+    uint8_t max;
+    uint8_t waterLevel;
 
     // Methods
 
@@ -23,8 +24,7 @@ struct DiamondSquare{
     // Does the 'Square' Step of the algorithm
     void Square();
     // Does the 'Diamond' step of the algorithm
-    void DIamond();
-
+    void Diamond();
 };
 
 #endif
