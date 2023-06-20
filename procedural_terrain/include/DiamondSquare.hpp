@@ -12,6 +12,7 @@ struct DiamondSquare
     std::vector<uint8_t> colorData;
     uint8_t max;
     uint8_t waterLevel;
+    std::string terrainName;
 
     // Constructor
     DiamondSquare();
