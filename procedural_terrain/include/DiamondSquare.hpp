@@ -13,6 +13,12 @@ struct DiamondSquare
     uint8_t max;
     uint8_t waterLevel;
 
+    // Constructor
+    DiamondSquare();
+
+    // Destructor
+    ~DiamondSquare();
+
     // Methods
 
     // Generates a random terrain heightmap
