@@ -39,6 +39,26 @@ void DiamondSquare::save(bool mode)
     }
 };
 
+void DiamondSquare::genColorMap()
+{
+    for (int i = 0; i < pixelData.size(); i = i + 3)
+    {
+        uint8_t x = pixelData[i];
+        if (x <= waterLevel)
+        {
+            colorData[i] = 0;
+            colorData[i + 1] = 255;
+            colorData[i + 2] = 255;
+        }
+        else
+        {
+            colorData[i] = x;
+            colorData[i + 1] = 255;
+            colorData[i + 2] = x;
+        }
+    }
+}
+
 DiamondSquare::~DiamondSquare(){
 
 };
