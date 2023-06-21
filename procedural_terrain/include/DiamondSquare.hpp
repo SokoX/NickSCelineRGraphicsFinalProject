@@ -13,7 +13,7 @@ struct DiamondSquare
     unsigned int max;
     unsigned int waterLevel;
     std::string terrainName;
-    unsigned int size;
+    unsigned int size{0};
 
     // Constructor
     DiamondSquare(std::string name, int n);

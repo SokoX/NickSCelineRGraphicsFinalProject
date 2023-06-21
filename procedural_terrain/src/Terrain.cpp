@@ -60,9 +60,9 @@ void Terrain::Init()
     {
         for (unsigned int x = 0; x < m_xSegments; ++x)
         {
-            float U = 1.0f - ((float)x / (float)m_xSegments);
-            float V = 1.0f - ((float)z / (float)m_zSegments);
-            m_geometry.AddVertex(x, m_heightData[x + (z * m_xSegments)], z, U, V);
+            float u = 1.0f - ((float)x / (float)m_xSegments);
+            float v = 1.0f - ((float)z / (float)m_zSegments);
+            m_geometry.AddVertex(x, m_heightData[x + z * m_xSegments], z, u, v);
         }
     }
 
