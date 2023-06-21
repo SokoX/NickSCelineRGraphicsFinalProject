@@ -34,6 +34,7 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h)
         // We want to request a double buffer for smooth updating.
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
         SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+     
 
         // Create window
         m_window = SDL_CreateWindow("Lab",
@@ -123,8 +124,10 @@ void SDLGraphicsProgram::Loop()
 {
 
     // Create our terrain
-    Terrain *myTerrain = new Terrain(512, 512, "terrain2.ppm");
-    myTerrain->LoadTexture("colormap.ppm");
+    Terrain *myTerrain = new Terrain(513, 513, "test_height_map.ppm");
+
+    myTerrain->LoadTexture("test_color_map.ppm");
+
     // Create a node for our terrain
     SceneNode *terrainNode;
     terrainNode = new SceneNode(myTerrain);
@@ -161,6 +164,8 @@ void SDLGraphicsProgram::Loop()
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
             {
+		remove("test_height_map.ppm");
+		remove("test_color_map.ppm");
                 quit = true;
             }
             // Handle keyboard input for the camera class

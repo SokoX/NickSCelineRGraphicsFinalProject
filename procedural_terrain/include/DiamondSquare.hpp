@@ -10,12 +10,13 @@ struct DiamondSquare
     // Fields
     std::vector<uint8_t> pixelData;
     std::vector<uint8_t> colorData;
-    uint8_t max;
-    uint8_t waterLevel;
+    unsigned int max;
+    unsigned int waterLevel;
     std::string terrainName;
+    unsigned int size;
 
     // Constructor
-    DiamondSquare();
+    DiamondSquare(std::string name, int n);
 
     // Destructor
     ~DiamondSquare();
@@ -29,9 +30,9 @@ struct DiamondSquare
     // Creates and saves a ppm for the height or color map
     void save(bool mode);
     // Does the 'Square' Step of the algorithm
-    void Square();
+    // void Square(uint8_t middle, uint8_t step);
     // Does the 'Diamond' step of the algorithm
-    void Diamond();
+    // void Diamond(uint8_t middle, uint8_t step);
 };
 
 #endif

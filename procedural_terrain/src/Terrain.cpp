@@ -16,7 +16,7 @@ Terrain::Terrain(unsigned int xSegs, unsigned int zSegs, std::string fileName) :
     // TODO: Currently there is a 1-1 mapping between a pixel and a segment
     // You might consider interpolating values if there are more segments
     // than pixels.
-    float scale = 5.0f; // Note that this scales down the values to make
+    float scale = 4.0f; // Note that this scales down the values to make
                         // the image a bit more flat.
     // Create height data
     m_heightData = new int[m_xSegments * m_zSegments];

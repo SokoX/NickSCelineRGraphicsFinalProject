@@ -4,9 +4,15 @@
 
 // Functionality that we created
 #include "SDLGraphicsProgram.hpp"
+#include "DiamondSquare.hpp"
 
 int main(int argc, char** argv){
-
+	
+	DiamondSquare heightmap("test", 9);
+	heightmap.genRandom();
+	heightmap.genColorMap();
+	heightmap.save(true);
+	heightmap.save(false);
 	// Create an instance of an object for a SDLGraphicsProgram
 	SDLGraphicsProgram mySDLGraphicsProgram(1280,720);
 	// Run our program forever
