@@ -14,6 +14,8 @@ struct DiamondSquare
     unsigned int waterLevel;
     std::string terrainName;
     unsigned int size;
+    int currMode;
+    int currVar;
 
     // Empty Constructor
     DiamondSquare();
@@ -27,9 +29,9 @@ struct DiamondSquare
     // Methods
 
     // Generates a random terrain heightmap
-    void genRandom();
+    void genRandom(int r);
     // Generates the corresponding color map
-    void genColorMap();
+    void genColorMap(int mode);
     // Creates and saves a ppm for the height or color map
     void save(bool mode);
 

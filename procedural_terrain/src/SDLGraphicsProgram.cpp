@@ -11,7 +11,7 @@
 // Initialization function
 // Returns a true or false value based on successful completion of setup.
 // Takes in dimensions of window.
-SDLGraphicsProgram::SDLGraphicsProgram(int w, int h, std::string name, unsigned int water)
+SDLGraphicsProgram::SDLGraphicsProgram(int w, int h, std::string name, unsigned int water, int color_mode, int var)
 {
     // Initialization flag
     bool success = true;
@@ -20,18 +20,15 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h, std::string name, unsigned 
     // The window we'll be rendering to
     m_window = NULL;
 
-    // Setting given terrain name and  water level
-    terr_name = name;
-    waterLevel = water;
-
-    CurrentMaps.terrainName = terr_name;
-    CurrentMaps.waterLevel = waterLevel;
+    // Setting up the DiamondSquare Object
+    CurrentMaps.terrainName = name;
+    CurrentMaps.waterLevel = water;
     CurrentMaps.max = 255;
     CurrentMaps.size = 513;
 
 
-    CurrentMaps.genRandom();
-    CurrentMaps.genColorMap();
+    CurrentMaps.genRandom(var);
+    CurrentMaps.genColorMap(color_mode);
     CurrentMaps.save(true);
     CurrentMaps.save(false);
 
@@ -190,8 +187,8 @@ void SDLGraphicsProgram::Loop()
 		if (e.key.keysym.sym == SDLK_r){
 			
 			CurrentMaps.clearData();
-			CurrentMaps.genRandom();
-    			CurrentMaps.genColorMap();
+			CurrentMaps.genRandom(CurrentMaps.currVar);
+    			CurrentMaps.genColorMap(CurrentMaps.currMode);
    	 		CurrentMaps.save(true);
    			CurrentMaps.save(false);
 

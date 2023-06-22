@@ -39,7 +39,7 @@ class SDLGraphicsProgram{
 public:
 
     // Constructor
-    SDLGraphicsProgram(int w, int h, std::string name, unsigned int water);
+    SDLGraphicsProgram(int w, int h, std::string name, unsigned int water, int color_mode, int var);
     // Destructor
     ~SDLGraphicsProgram();
     // Setup OpenGL
@@ -52,10 +52,10 @@ public:
     void GetOpenGLVersionInfo();
 
     // Field for terrain session name
-    std::string terr_name;
+    // std::string terr_name;
     
     // Field for water level
-    unsigned int waterLevel;
+    // unsigned int waterLevel;
 
 
 private:

@@ -22,6 +22,8 @@ DiamondSquare::DiamondSquare(std::string name, unsigned int water)
     max = 255;
     size = 513; 
     waterLevel = water;
+    currMode = 0;
+    currVar = 128;
 
     std::cout << "built! with size " << size << std::endl;
 
@@ -88,11 +90,13 @@ void DiamondSquare::save(bool mode)
     }
 };
 
-void DiamondSquare::genColorMap()
+void DiamondSquare::genColorMap(int mode)
 {
+   
+	currMode = mode;
 
-    std::vector<uint8_t> pixelDataT;
-
+    // Two other variations which failed miserably...
+    //
     // for (int i = 0; i < pixelData.size(); i = i + 3)
     // {
     //     uint8_t x = pixelData[i];
@@ -131,23 +135,50 @@ void DiamondSquare::genColorMap()
     //     }
     // }
 
-    for (int i = (size * 3) - 3; i >= 0; i -= 3)
-    {
-        for (int j = size - 1; j >= 0; j--)
-        {
-            uint8_t x = pixelData[i + (j * (size * 3))];
-            if (x <= waterLevel)
+    if(mode == 2){
+        for (int i = (size * 3) - 3; i >= 0; i -= 3)
+    	{
+            for (int j = size - 1; j >= 0; j--)
             {
-                colorData.push_back(0);
-                colorData.push_back(255);
-                colorData.push_back(255);
+            	uint8_t x = pixelData[i + (j * (size * 3))];
+            	if (x <= waterLevel)
+            	{
+                    colorData.push_back(255);
+                    colorData.push_back(150);
+                    colorData.push_back(40);
+		}
+            	else
+            	{
+                    int sum = x - (waterLevel - 70);
+                    colorData.push_back(std::min(255, sum));
+                    colorData.push_back(90);
+                    colorData.push_back(90);
+                }
             }
-            else
+        }
+    }
+
+    
+
+    else{
+        for (int i = (size * 3) - 3; i >= 0; i -= 3)
+    	{
+            for (int j = size - 1; j >= 0; j--)
             {
-                int sum = x - (waterLevel / 2);
-                colorData.push_back(std::max(0, sum));
-                colorData.push_back(255);
-                colorData.push_back(std::max(0, sum));
+            	uint8_t x = pixelData[i + (j * (size * 3))];
+            	if (x <= waterLevel)
+            	{
+                    colorData.push_back(0);
+                    colorData.push_back(255);
+                    colorData.push_back(255);
+		}
+            	else
+            	{
+                    int sum = x - (waterLevel / 2);
+                    colorData.push_back(sum);
+                    colorData.push_back(255);
+                    colorData.push_back(sum);
+                }
             }
         }
     }
@@ -161,8 +192,10 @@ int random(uint8_t val)
     return ((rand() % ((2 * val) + 1)) - val);
 }
 // Generates the Random Terrain heightmap
-void DiamondSquare::genRandom()
+void DiamondSquare::genRandom(int r)
 {
+
+    currVar = r;
 
     int arr[513][513];
 
@@ -171,7 +204,7 @@ void DiamondSquare::genRandom()
     arr[512][0] = rand() % 256;
     arr[512][512] = rand() % 256;
     int step = size - 1;
-    int rand_val = 128;
+    int rand_val = r;
 
     std::cout << arr[0][0] << std::endl;
     std::cout << arr[0][512] << std::endl;
