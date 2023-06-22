@@ -30,6 +30,10 @@ public:
     // This then sets the heights of the terrain.
     void LoadHeightMap(Image image);
 
+    // this RESETS our Terrain with new stuff!!!
+    void Reset(std::string fileName);
+
+
 private:
     // data
     unsigned int m_xSegments;

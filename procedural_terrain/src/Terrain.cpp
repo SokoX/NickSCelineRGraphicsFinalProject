@@ -46,6 +46,36 @@ Terrain::~Terrain()
     }
 }
 
+// This RESETS our Terrain with a new heightmap
+void Terrain::Reset(std::string fileName){
+	
+	delete m_heightData;
+
+	m_geometry.clearFields();
+
+	std::cout << "(Terrain.cpp) Reset() called \n";
+
+    	// Load up some image data
+   	Image heightMap(fileName);
+    	heightMap.LoadPPM(true);
+
+    	float scale = 4.0f; 		// Note that this scales down the values to make
+                        		// the image a bit more flat.
+    	// Create height data
+    	m_heightData = new int[m_xSegments * m_zSegments];
+
+    	for (unsigned int z = 0; z < m_zSegments; ++z)
+    	{
+        	for (unsigned int x = 0; x < m_xSegments; ++x)
+        	{
+            		m_heightData[x + (z * m_xSegments)] = (float)heightMap.GetPixelR(z, x) / scale;
+        	}
+    	}
+
+    	Init();
+
+}
+
 // Creates a grid of segments
 // This article has a pretty handy illustration here:
 // http://www.learnopengles.com/wordpress/wp-content/uploads/2012/05/vbo.png
