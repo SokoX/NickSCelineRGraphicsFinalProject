@@ -270,7 +270,10 @@ void DiamondSquare::genRandom()
     }
 }
 
-// Does the Square Step
+
+// I AM ANGRY AT THESE METHODS >:(
+//
+// Does NOT DO the Square Step
 // void Square(uint8_t middle, uint8_t step){
 //
 //	for(int a = 0; a < size; a += step){
@@ -282,7 +285,12 @@ void DiamondSquare::genRandom()
 //
 //}
 
-// Does the Diamond Step
+// Does NOT DO the Diamond Step
 // void Diamond(uint8_t middle, uint8_t step){
 //
 //}
+
+void DiamondSquare::clearData(){
+	pixelData.clear();
+	colorData.clear();
+}

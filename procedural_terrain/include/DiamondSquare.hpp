@@ -32,10 +32,16 @@ struct DiamondSquare
     void genColorMap();
     // Creates and saves a ppm for the height or color map
     void save(bool mode);
+
+    // RELICS, supposed to be helpers but did anything but help :DDD
+    //
     // Does the 'Square' Step of the algorithm
     // void Square(uint8_t middle, uint8_t step);
     // Does the 'Diamond' step of the algorithm
     // void Diamond(uint8_t middle, uint8_t step);
+    
+    // Clears pixelData and colorData
+    void clearData();
 };
 
 #endif
