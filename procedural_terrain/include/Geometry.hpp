@@ -43,6 +43,9 @@ public:
     // Retrieve the pointer to the indices
 	unsigned int* GetIndicesDataPtr();
 
+	// Clear all fields (This is for resetting purposes)
+	void clearFields();
+
 private:
 	// m_bufferData stores all of the vertexPositons, coordinates, normals, etc.
 	// This is all of the information that should be sent to the vertex Buffer Object

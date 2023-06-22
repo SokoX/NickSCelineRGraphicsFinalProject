@@ -175,3 +175,15 @@ unsigned int Geometry::GetIndicesSize(){
 unsigned int* Geometry::GetIndicesDataPtr(){
 	return m_indices.data();
 }
+
+// Clears all fields
+void Geometry::clearFields(){
+	
+	m_bufferData.clear();
+	m_vertexPositions.clear();
+	m_textureCoords.clear();
+	m_tangents.clear();
+	m_normals.clear();
+	m_biTangents.clear();
+	m_indices.clear();
+}
