@@ -5,20 +5,52 @@
 // Functionality that we created
 #include "SDLGraphicsProgram.hpp"
 
+#include <string>
+#include <iostream>
+
 
 int main(int argc, char** argv){
 	
-//	DiamondSquare heightmap("test", 9);
-//	heightmap.genRandom();
-//	heightmap.genColorMap();
-//	heightmap.save(true);
-//	heightmap.save(false);
+	// Inital attempt. Moved into SDLGraphicsProgram.cpp ~~~
+	//
+	//	DiamondSquare heightmap("test", 9);
+	//	heightmap.genRandom();
+	//	heightmap.genColorMap();
+	//	heightmap.save(true);
+	//	heightmap.save(false);
+
+	if(argc == 2){
+
+		std::string str = argv[1];
+
+		SDLGraphicsProgram mySDLGraphicsProgram(1280, 720, str, 100);
+
+		// Run Our Program forever!
+		mySDLGraphicsProgram.Loop();
+
+	}
 	// Create an instance of an object for a SDLGraphicsProgram
-	SDLGraphicsProgram mySDLGraphicsProgram(1280, 720, "test", 100);
-	// 1280, 720
-	// Run our program forever
-	mySDLGraphicsProgram.Loop();
-	// When our program ends, it will exit scope, the
-	// destructor will then be called and clean up the program.
+	else if(argc == 3){
+
+		std::string str = argv[1];
+
+		std::string num = argv[2];
+
+		unsigned int w = stoul(num, nullptr, 0);
+
+		SDLGraphicsProgram mySDLGraphicsProgram(1280, 720, str, w);
+
+		// Run Our Program forever!
+		mySDLGraphicsProgram.Loop();
+
+	}
+	else{
+		std::cerr << "You must provide either 1 or 2 arguments!";
+		std::cerr << "Acceptable inputs are:";
+		std::cerr << "lab.exe given_name";
+		std::cerr << "lab.exe given_name water_level";
+
+	}
+
 	return 0;
 }
