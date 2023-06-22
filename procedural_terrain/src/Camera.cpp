@@ -10,8 +10,9 @@ void Camera::MouseLook(int mouseX, int mouseY){
     // Detect how much the mouse has moved since
     // the last time
     glm::vec2 mouseDelta = 0.005f*(newMousePosition-m_oldMousePosition);
+    glm::vec3 m_leftVector = glm::cross(m_upVector, m_viewDirection);
 
-    m_viewDirection = glm::mat3(glm::rotate(-mouseDelta.x, m_upVector)) * m_viewDirection;
+    m_viewDirection = glm::mat3(glm::rotate(-mouseDelta.x, m_upVector)) * glm::mat3(glm::rotate(mouseDelta.y, m_leftVector)) * m_viewDirection;
     
     // Update our old position after we have made changes 
     m_oldMousePosition = newMousePosition;

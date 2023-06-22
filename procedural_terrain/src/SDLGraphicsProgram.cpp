@@ -168,6 +168,8 @@ void SDLGraphicsProgram::Loop()
 		remove("test_color_map.ppm");
                 quit = true;
             }
+
+
             // Handle keyboard input for the camera class
             //             if(e.type==SDL_MOUSEMOTION){
             //                 // Handle mouse movements
@@ -223,6 +225,22 @@ void SDLGraphicsProgram::Loop()
             // gCamera.MoveRight(0.05f);
             m_renderer->GetCamera(0)->MoveRight(cameraSpeed);
         }
+        if (state[SDL_SCANCODE_UP])
+        {
+
+            m_renderer->GetCamera(0)->MoveUp(cameraSpeed);
+        }
+        if (state[SDL_SCANCODE_DOWN])
+        {
+            
+            m_renderer->GetCamera(0)->MoveDown(cameraSpeed);
+        }
+	if (state[SDL_SCANCODE_Q])
+	{
+		
+	    quit = true;
+	}
+
 
         int mouseX, mouseY;
         SDL_GetGlobalMouseState(&mouseX, &mouseY);
