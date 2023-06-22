@@ -8,14 +8,20 @@
 #include <algorithm>
 #include <time.h>
 
+// Empty Constructor
+DiamondSquare::DiamondSquare(){
+	
+	srand(time(0));
+}
+
 // Constructor
-DiamondSquare::DiamondSquare(std::string name, int n) : size(pow(2, n) + 1)
+DiamondSquare::DiamondSquare(std::string name, unsigned int water)
 {
 
     terrainName = name;
     max = 255;
-    // size = pow(2, n) + 1;
-    waterLevel = 100;
+    size = 513; 
+    waterLevel = water;
 
     std::cout << "built! with size " << size << std::endl;
 
@@ -158,7 +164,7 @@ int random(uint8_t val)
 void DiamondSquare::genRandom()
 {
 
-    int arr[size][size];
+    int arr[513][513];
 
     arr[0][0] = rand() % 256;
     arr[0][512] = rand() % 256;

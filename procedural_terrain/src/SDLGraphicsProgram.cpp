@@ -1,6 +1,7 @@
 #include "SDLGraphicsProgram.hpp"
 #include "Camera.hpp"
 #include "Terrain.hpp"
+#include "DiamondSquare.hpp"
 
 #include <iostream>
 #include <string>
@@ -10,7 +11,7 @@
 // Initialization function
 // Returns a true or false value based on successful completion of setup.
 // Takes in dimensions of window.
-SDLGraphicsProgram::SDLGraphicsProgram(int w, int h)
+SDLGraphicsProgram::SDLGraphicsProgram(int w, int h, std::string name, unsigned int water)
 {
     // Initialization flag
     bool success = true;
@@ -18,6 +19,20 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h)
     std::stringstream errorStream;
     // The window we'll be rendering to
     m_window = NULL;
+
+    // Setting given terrain name and  water level
+    terr_name = name;
+    waterLevel = water;
+
+    CurrentMaps.terrainName = terr_name;
+    CurrentMaps.waterLevel = waterLevel;
+    CurrentMaps.max = 255;
+    CurrentMaps.size = 513;
+
+    CurrentMaps.genRandom();
+    CurrentMaps.genColorMap();
+    CurrentMaps.save(true);
+    CurrentMaps.save(false);
 
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -164,8 +179,6 @@ void SDLGraphicsProgram::Loop()
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
             {
-		remove("test_height_map.ppm");
-		remove("test_color_map.ppm");
                 quit = true;
             }
 

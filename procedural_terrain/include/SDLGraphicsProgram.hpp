@@ -26,6 +26,8 @@
 // Include the 'Renderer.hpp' which deteremines what
 // the graphics API is going to be for OpenGL
 #include "Renderer.hpp"
+#include "DiamondSquare.hpp"
+#include <string>
 
 
 // Purpose:
@@ -37,7 +39,7 @@ class SDLGraphicsProgram{
 public:
 
     // Constructor
-    SDLGraphicsProgram(int w, int h);
+    SDLGraphicsProgram(int w, int h, std::string name, unsigned int water);
     // Destructor
     ~SDLGraphicsProgram();
     // Setup OpenGL
@@ -49,6 +51,13 @@ public:
     // Helper Function to Query OpenGL information.
     void GetOpenGLVersionInfo();
 
+    // Field for terrain session name
+    std::string terr_name;
+    
+    // Field for water level
+    unsigned int waterLevel;
+
+
 private:
 	// The Renderer responsible for drawing objects
 	// in OpenGL (Or whatever Renderer you choose!)
@@ -57,6 +66,8 @@ private:
     SDL_Window* m_window ;
     // OpenGL context
     SDL_GLContext m_openGLContext;
+    // The Diamond Square Representation for the Terrain
+    DiamondSquare CurrentMaps;
 };
 
 #endif
