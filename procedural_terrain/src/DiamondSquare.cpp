@@ -135,7 +135,37 @@ void DiamondSquare::genColorMap(int mode)
     //     }
     // }
 
-    if(mode == 2){
+    if(mode == 1){
+        for (int i = (size * 3) - 3; i >= 0; i -= 3)
+    	{
+            for (int j = size - 1; j >= 0; j--)
+            {
+            	uint8_t x = pixelData[i + (j * (size * 3))];
+            	if (x <= waterLevel)
+            	{
+                    colorData.push_back(0);
+                    colorData.push_back(100);
+                    colorData.push_back(200);
+		}
+		else if((x > waterLevel) && (x < 200))
+		{
+                    int div = x / 2;
+		    colorData.push_back(div);
+                    colorData.push_back(x);
+                    colorData.push_back(div);
+		}
+            	else
+            	{
+		    int sum = 400 - x;
+                    colorData.push_back(sum);
+                    colorData.push_back(sum);
+                    colorData.push_back(sum);
+                }
+            }
+        }
+    }
+
+    else if(mode == 2){
         for (int i = (size * 3) - 3; i >= 0; i -= 3)
     	{
             for (int j = size - 1; j >= 0; j--)
@@ -157,8 +187,39 @@ void DiamondSquare::genColorMap(int mode)
             }
         }
     }
+    else if(mode == 3){
+        for (int i = (size * 3) - 3; i >= 0; i -= 3)
+    	{
+            for (int j = size - 1; j >= 0; j--)
+            {
+            	uint8_t x = pixelData[i + (j * (size * 3))];
+            	if (x <= waterLevel)
+            	{
+                    colorData.push_back(20);
+                    colorData.push_back(150);
+                    colorData.push_back(250);
+		}
+		else if (x < (waterLevel + 10))
+            	{
+                    colorData.push_back(230);
+                    colorData.push_back(230);
+                    colorData.push_back(150);
+		}
 
-    
+            	else
+            	{
+		    int flr = waterLevel + 10;
+		    int rng = 255 - flr;
+		    int sub = x - flr;
+		    float norm1 = (200.0 * ((float)sub / (float)rng)) + 55;
+		    float norm2 = 155.0 * ((float)sub / (float)rng);
+                    colorData.push_back((int)norm1);
+                    colorData.push_back(100 + (int)norm2);
+                    colorData.push_back((int)norm1);
+                }
+            }
+        }
+    }
 
     else{
         for (int i = (size * 3) - 3; i >= 0; i -= 3)
