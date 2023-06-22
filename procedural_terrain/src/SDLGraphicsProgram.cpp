@@ -29,6 +29,7 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h, std::string name, unsigned 
     CurrentMaps.max = 255;
     CurrentMaps.size = 513;
 
+
     CurrentMaps.genRandom();
     CurrentMaps.genColorMap();
     CurrentMaps.save(true);
@@ -139,9 +140,11 @@ void SDLGraphicsProgram::Loop()
 {
 
     // Create our terrain
-    Terrain *myTerrain = new Terrain(513, 513, "test_height_map.ppm");
+    std::string temp1 = CurrentMaps.terrainName + "_height_map.ppm";
+    Terrain *myTerrain = new Terrain(513, 513, temp1);
 
-    myTerrain->LoadTexture("test_color_map.ppm");
+    std::string temp2 = CurrentMaps.terrainName + "_color_map.ppm";
+    myTerrain->LoadTexture(temp2);
 
     // Create a node for our terrain
     SceneNode *terrainNode;
@@ -169,18 +172,33 @@ void SDLGraphicsProgram::Loop()
     {
 
         // For our terrain setup the identity transform each frame
-        // TODO maybe move this
+        // TODO maybe move this XXXXX NO 
         terrainNode->GetLocalTransform().LoadIdentity();
 
         // Handle events on queue
         while (SDL_PollEvent(&e) != 0)
-        {
+	{
+        
             // User posts an event to quit
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
             {
                 quit = true;
             }
+	    if (e.type == SDL_KEYDOWN){
+
+		if (e.key.keysym.sym == SDLK_r){
+			
+			CurrentMaps.clearData();
+			CurrentMaps.genRandom();
+    			CurrentMaps.genColorMap();
+   	 		CurrentMaps.save(true);
+   			CurrentMaps.save(false);
+
+			myTerrain->Reset(temp1);
+			myTerrain->LoadTexture(temp2);
+		}
+	    }
 
 
             // Handle keyboard input for the camera class
