@@ -29,8 +29,24 @@ DiamondSquare::~DiamondSquare(){
 
 void saveHelper(std::string modeName, std::string terrainName, std::vector<uint8_t> pixelData, unsigned int m, unsigned int waterLevel)
 {
+    std::string filePath = terrainName + "_" + modeName + ".ppm";
+
+    // Trying to remove files of the same name. UNSUCCESSFUL FIRST TRY
+    // int len = filePath.length();
+    // char fileName[len] = filePath.c_str();
+
+    char *fileName = &filePath[0];
+
+    std::ifstream inFile;
+
+    inFile.open(filePath);
+
+    if(inFile.is_open()){
+	remove(fileName);
+    }
+
     std::ofstream outFile;
-    outFile.open(terrainName + "_" + modeName + ".ppm");
+    outFile.open(filePath);
     int component_count = 0;
     outFile << "P3" << std::endl;
     outFile << std::to_string(513) + " " + std::to_string(513) << std::endl;
